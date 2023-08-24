@@ -36,8 +36,11 @@ pub fn build(b: *Builder) void {
         .target = target,
         .optimize = optimize,
     });
-    c_example.addCSourceFile("example/example.c", &.{});
-    c_example.addIncludePath("include");
+    c_example.addCSourceFile(.{
+        .file = .{ .path = "example/example.c" },
+        .flags = &.{},
+    });
+    c_example.addIncludePath(.{ .path = "include" });
     c_example.linkLibC();
     c_example.linkLibrary(lib);
 
